@@ -64,7 +64,7 @@ class _MainScreenState extends State<MainScreen>{
         BottomNavigationBarItem(icon: Icon(Icons.add), label: 'add'),
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings'),
 
-      ]
+      ],
       currentIndex: _SelectedIndex,
       selectedItemColor: Colors.blue,
       onTap: _onItemTapped,
