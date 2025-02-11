@@ -7,7 +7,8 @@ class HomeScreen extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(title: Text("subscriptions")),
       body: ListView(
-        children: [
+        children:
+         [
           SubscriptionTile(
             title: "3mbs",
             price: "\ksh1000",
@@ -27,7 +28,8 @@ class HomeScreen extends StatelessWidget{
             title: "15mbs",
             price: "\ksh2500",
             renewalDate: "feb 20"
-          )
+          ),
+          
         ]
       )
       );
