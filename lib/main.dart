@@ -1,29 +1,56 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/home_screen.dart';
+import 'screens/login.dart';
 import 'screens/subscription_details.dart';
 import 'screens/add_subscription.dart';
 import 'screens/settings.dart';
+import 'sevices/firebase_auth_service.dart';
 
 
 
 void main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp() as Widget);
   
 }
 
 class MyApp extends StatelessWidget {
-  
+  final FirebaseAuthService _authService = FirebaseAuthService();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'kwetu billing',
       debugShowCheckedModeBanner: false,
-      home: MainScreen(),
-      initialRoute: Routes.dashboard,
+      //home: _authService.getCurrentUser() == null ? LoginScreen() : HomeScreen(),
+      home: StreamBuilder(
+        stream: _authService.authStateChanges(),
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+  switch (snapshot.connectionState) {
+    case ConnectionState.active:
+      User? user = snapshot.data;
+      return user != null ? MainScreen() : LoginScreen();
+    case ConnectionState.waiting:  
+      return const Center(child: CircularProgressIndicator());
+    case ConnectionState.done:     
+      return const Center(child: Text("Done")); 
+   
+    default:                     
+      return const Center(child: Text("Unknown State"));
+  }
+},
+        /*
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.active){
+            User? user = snapshot.data;
+            return user != null ? MainScreen() : LoginScreen();
+          } 
+        },*/
+        ),
+      //initialRoute: Routes.dashboard,
       routes: Routes.routes,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -59,7 +86,7 @@ class _MainScreenState extends State<MainScreen>{
   }
 
   @override
-  Widget build(BuildContext sontext) {
+  Widget build(BuildContext context) {
     return Scaffold(
     body: _widgetoptions.elementAt(_SelectedIndex),
     bottomNavigationBar: BottomNavigationBar(

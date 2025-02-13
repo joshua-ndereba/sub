@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sub/screens/home_screen.dart';
+import 'package:sub/screens/login.dart';
+import '../sevices/firebase_auth_service.dart';
 
 class Settings extends StatelessWidget{
+  final FirebaseAuthService _authService = FirebaseAuthService();
+
   @override
   Widget build(BuildContext context){
       return Scaffold(
@@ -10,7 +15,10 @@ class Settings extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children:[
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await _authService.signout();
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
                 child: Text("logout"),
                 ),
             ],

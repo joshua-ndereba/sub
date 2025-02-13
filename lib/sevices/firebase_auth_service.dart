@@ -30,6 +30,9 @@ class FirebaseAuthService {
     await _googleSignIn.signOut();
   }
 
+  Stream<User?> authStateChanges() {
+    return _auth.authStateChanges();
+  }
   //get current user
   User? getCurrentUser() {
     return _auth.currentUser;
