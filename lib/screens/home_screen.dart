@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sub/screens/add_subscription.dart';
+import 'package:sub/screens/settings.dart';
+import 'package:sub/widgets/bottomnavigationbr.dart';
 import '../widgets/subscription_tile.dart';
 
 class HomeScreen extends StatelessWidget{
@@ -31,6 +34,14 @@ class HomeScreen extends StatelessWidget{
           ),
           
         ]
+      ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 1,
+        screens: [
+          HomeScreen(),
+          AddSubscription(),
+          Settings(),
+        ],
       )
       );
   }

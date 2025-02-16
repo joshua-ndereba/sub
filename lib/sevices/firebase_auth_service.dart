@@ -38,6 +38,16 @@ class FirebaseAuthService {
     return _auth.currentUser;
   }
 
+  
+  Future<bool> isLoggedIn() async {
+
+    
+      User? user = _auth.currentUser;
+
+      return user != null; // Simple check for a logged-in user
+
+    }
+
 }
 
 

@@ -17,92 +17,44 @@ void main() async {
   
 }
 
-class MyApp extends StatelessWidget {
-  final FirebaseAuthService _authService = FirebaseAuthService();
+class MyApp extends StatefulWidget{
+ 
+  @override
+  _MyAppState createState() => _MyAppState();
+   
+  
+}
 
+class _MyAppState extends State<MyApp> {
+  final FirebaseAuthService _authService = FirebaseAuthService();
+  bool _isLoggedIn = false;
+  @override
+  void initState(){
+    super.initState();
+    _checkAuthentication();
+  }
+
+  Future<void> _checkAuthentication() async {
+    bool _isLoggedIn = await _authService.isLoggedIn();
+    setState(() {
+      _isLoggedIn =_isLoggedIn;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'kwetu billing',
       debugShowCheckedModeBanner: false,
-      //home: _authService.getCurrentUser() == null ? LoginScreen() : HomeScreen(),
-      home: StreamBuilder(
-        stream: _authService.authStateChanges(),
-        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-  switch (snapshot.connectionState) {
-    case ConnectionState.active:
-      User? user = snapshot.data;
-      return user != null ? MainScreen() : LoginScreen();
-    case ConnectionState.waiting:  
-      return const Center(child: CircularProgressIndicator());
-    case ConnectionState.done:     
-      return const Center(child: Text("Done")); 
-   
-    default:                     
-      return const Center(child: Text("Unknown State"));
-  }
-},
-        /*
-        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-          if (snapshot.connectionState == ConnectionState.active){
-            User? user = snapshot.data;
-            return user != null ? MainScreen() : LoginScreen();
-          } 
-        },*/
-        ),
-      //initialRoute: Routes.dashboard,
+      home: _isLoggedIn? HomeScreen(): LoginScreen(),
+        
+      initialRoute: _isLoggedIn? Routes.dashboard: Routes.login,
       routes: Routes.routes,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        ),
+        ), 
         
     );
   }
-}
-
-class MainScreen extends StatefulWidget{
-  
-  @override
-  _MainScreenState createState() => _MainScreenState();
-  
- 
-  
-}
-
-class _MainScreenState extends State<MainScreen>{
-  int _SelectedIndex = 0;
-
-  static List<Widget> _widgetoptions = <Widget>[
-    HomeScreen(),
-    AddSubscription(),
-    Settings(),
-  ];
-
-  void _onItemTapped(int index){
-    setState(() {
-      _SelectedIndex = index;}
-
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-    body: _widgetoptions.elementAt(_SelectedIndex),
-    bottomNavigationBar: BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.add), label: 'add'),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings'),
-
-      ],
-      currentIndex: _SelectedIndex,
-      selectedItemColor: Colors.blue,
-      onTap: _onItemTapped,
-    ),
-    );
-  }
-
 }
 
 class Routes {
@@ -113,6 +65,11 @@ class Routes {
 
   static final routes = {
    dashboard: (context) => HomeScreen(),
+   login: (context) => LoginScreen(),
+   //registration: (context) => HomeScreen(),
+   //dashboard: (context) => HomeScreen(),
+   //dashboard: (context) => HomeScreen(),
+   
     
   };
 }
