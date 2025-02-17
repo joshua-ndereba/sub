@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget  {
             ElevatedButton(onPressed: () async {
               var user = await _authService.signinWithGoogle();
               if (user != null){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
               }
             }, child: const Text("Sign in with Google"),
             ),

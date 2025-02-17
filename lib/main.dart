@@ -13,7 +13,7 @@ import 'sevices/firebase_auth_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp() as Widget);
+  runApp(const MyApp() as Widget);
   
 }
 
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'kwetu billing',
       debugShowCheckedModeBanner: false,
-      home: _isLoggedIn? HomeScreen(): LoginScreen(),
+      home: _isLoggedIn? const HomeScreen(): LoginScreen(),
         
       //initialRoute: _isLoggedIn? Routes.dashboard: Routes.login,
       routes: Routes.routes,
@@ -66,7 +66,7 @@ class Routes {
   static const String dashboard = '/dashboard';
 
   static final routes = {
-   dashboard: (context) => HomeScreen(),
+   dashboard: (context) => const HomeScreen(),
    login: (context) => LoginScreen(),
    //registration: (context) => HomeScreen(),
    //dashboard: (context) => HomeScreen(),

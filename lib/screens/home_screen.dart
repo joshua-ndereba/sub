@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget{
       appBar: AppBar(title: const Text("subscriptions")),
       body: ListView(
         children:
-         [
+         const [
           SubscriptionTile(
             title: "3mbs",
             price: "ksh1000",
@@ -40,8 +40,8 @@ class HomeScreen extends StatelessWidget{
       bottomNavigationBar: BottomNavBar(
         currentIndex: 1,
         screens: [
-          HomeScreen(),
-          AddSubscription(),
+          const HomeScreen(),
+          const AddSubscription(),
           Settings(),
         ],
       )
