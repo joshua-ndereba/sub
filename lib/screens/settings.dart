@@ -6,10 +6,12 @@ import '../sevices/firebase_auth_service.dart';
 class Settings extends StatelessWidget{
   final FirebaseAuthService _authService = FirebaseAuthService();
 
+  Settings({super.key});
+
   @override
   Widget build(BuildContext context){
       return Scaffold(
-        appBar: AppBar(title: Text("settings")),
+        appBar: AppBar(title: const Text("settings")),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +21,7 @@ class Settings extends StatelessWidget{
                   await _authService.signout();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
-                child: Text("logout"),
+                child: const Text("logout"),
                 ),
             ],
           ),

@@ -5,7 +5,7 @@ class SubscriptionTile extends StatelessWidget{
   final String? price;
   final String? renewalDate;
 
-  SubscriptionTile({
+  const SubscriptionTile({super.key, 
     this.title, 
     this.price,
     this.renewalDate,
@@ -15,11 +15,11 @@ class SubscriptionTile extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: ListTile(
-        title: Text(title!, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        title: Text(title!, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Text("price: $price | Renewal: $renewalDate"),
-        trailing: Icon(Icons.arrow_forward_ios),
+        trailing: const Icon(Icons.arrow_forward_ios),
         onTap: () {
           //navigate to detail screen
         },

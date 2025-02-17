@@ -18,6 +18,8 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget{
+  const MyApp({super.key});
+
  
   @override
   _MyAppState createState() => _MyAppState();
@@ -27,7 +29,7 @@ class MyApp extends StatefulWidget{
 
 class _MyAppState extends State<MyApp> {
   final FirebaseAuthService _authService = FirebaseAuthService();
-  bool _isLoggedIn = false;
+  final bool _isLoggedIn = false;
   @override
   void initState(){
     super.initState();
@@ -35,9 +37,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _checkAuthentication() async {
-    bool _isLoggedIn = await _authService.isLoggedIn();
+    bool isLoggedIn = await _authService.isLoggedIn();
     setState(() {
-      _isLoggedIn =_isLoggedIn;
+      isLoggedIn =isLoggedIn;
     });
   }
   @override
@@ -47,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: _isLoggedIn? HomeScreen(): LoginScreen(),
         
-      initialRoute: _isLoggedIn? Routes.dashboard: Routes.login,
+      //initialRoute: _isLoggedIn? Routes.dashboard: Routes.login,
       routes: Routes.routes,
       theme: ThemeData(
         primarySwatch: Colors.blue,

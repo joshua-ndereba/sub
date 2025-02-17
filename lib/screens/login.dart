@@ -5,6 +5,8 @@ import 'home_screen.dart';
 class LoginScreen extends StatelessWidget  {
   final FirebaseAuthService _authService = FirebaseAuthService();
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -12,14 +14,14 @@ class LoginScreen extends StatelessWidget  {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Kwetu subscription", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-            SizedBox(height: 20,),
+            const Text("Kwetu subscription", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+            const SizedBox(height: 20,),
             ElevatedButton(onPressed: () async {
               var user = await _authService.signinWithGoogle();
               if (user != null){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
               }
-            }, child: Text("Sign in with Google"),
+            }, child: const Text("Sign in with Google"),
             ),
           ],
         )

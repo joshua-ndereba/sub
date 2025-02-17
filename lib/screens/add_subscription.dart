@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sub/widgets/mytextfield.dart';
 
 class AddSubscription extends StatefulWidget{
+  const AddSubscription({super.key});
+
   @override
   _Addsubscriptionstate createState() => _Addsubscriptionstate();
   
@@ -16,20 +18,20 @@ class _Addsubscriptionstate extends State<AddSubscription>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text("Add subscrition")),
+      appBar: AppBar(title: const Text("Add subscrition")),
       body: Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           Mytextfield(hintText: "Subscription name ", controller: _namecontroller),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Mytextfield(hintText: "Price", controller: _pricecontroller),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Mytextfield(hintText: "renewal date", controller: _datecontroller),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           ElevatedButton(
             onPressed: () {},
-            child: Text("save subscription"),
+            child: const Text("save subscription"),
           ),
         ],
       )
